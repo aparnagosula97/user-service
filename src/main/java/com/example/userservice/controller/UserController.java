@@ -36,8 +36,6 @@ public class UserController {
         return ResponseEntity.ok(service.getUserByFirstName(firstName));
     }
 
-    // update a given user(one more attributes)
-    // inputs -> userid, user
 
     @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@RequestBody UserRequest userRequest, @PathVariable Integer id){
