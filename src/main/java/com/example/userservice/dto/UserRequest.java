@@ -1,19 +1,22 @@
 package com.example.userservice.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
-    @NotNull
+    @NotNull(message="first name should not be null")
     private String firstName;
     private String lastName;
     private Integer age;
-    @NotBlank
+    @NotBlank(message = "address should not be blank")
     private String address;
 }

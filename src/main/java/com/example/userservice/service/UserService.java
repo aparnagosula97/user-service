@@ -1,5 +1,6 @@
 package com.example.userservice.service;
 
+import com.example.userservice.controller.exception.UserNotFoundException;
 import com.example.userservice.dto.UserRequest;
 import com.example.userservice.entity.User;
 import com.example.userservice.repository.UserRepository;
@@ -28,7 +29,7 @@ public class UserService {
     public User updateUser(UserRequest userRequest, Integer id) {
         Optional<User> optional = repository.findById(id);
         if(optional.isEmpty()){
-            throw new RuntimeException("USER NOT FOUND");
+            throw new UserNotFoundException("USER NOT FOUND");
         }
         User user = optional.get();
         user.setAddress(userRequest.getAddress());
@@ -41,6 +42,9 @@ public class UserService {
 
     public User getUserById(Integer userId) {
         Optional<User> optional = repository.findById(userId);
+        if(optional.isEmpty()){
+            throw new UserNotFoundException("USER NOT FOUND");
+        }
         return optional.get();
     }
 

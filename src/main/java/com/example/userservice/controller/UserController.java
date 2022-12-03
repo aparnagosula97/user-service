@@ -3,11 +3,15 @@ package com.example.userservice.controller;
 import com.example.userservice.dto.UserRequest;
 import com.example.userservice.entity.User;
 import com.example.userservice.service.UserService;
+
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,11 +21,12 @@ public class UserController {
     UserService service;
 
     @PostMapping()
-    public ResponseEntity<User> saveUser(@RequestBody UserRequest userRequest){
+    public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest){
         return new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 
     @GetMapping
+    @ApiOperation(value = "Get All Student", produces = "application/json")
     public ResponseEntity<List<User>> getAllTheUsers(){
         return ResponseEntity.ok(service.getAllTheUsers());
     }
