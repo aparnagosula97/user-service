@@ -1,13 +1,11 @@
 package com.example.userservice.service;
 
-import com.example.userservice.controller.exception.UserNotFoundException;
+import com.example.userservice.exception.UserNotFoundException;
 import com.example.userservice.dto.UserRequest;
 import com.example.userservice.entity.User;
 import com.example.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;

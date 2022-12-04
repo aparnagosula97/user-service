@@ -1,4 +1,4 @@
-package com.example.userservice.controller.exception;
+package com.example.userservice.exception;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(String message) {
