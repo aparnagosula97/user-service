@@ -21,28 +21,32 @@ public class UserController {
     UserService service;
 
     @PostMapping()
+    @ApiOperation(value = "Save the user ", produces = "application/json")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest){
         return new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 
     @GetMapping
-    @ApiOperation(value = "Get All Student", produces = "application/json")
+    @ApiOperation(value = "Get all users", produces = "application/json")
     public ResponseEntity<List<User>> getAllTheUsers(){
         return ResponseEntity.ok(service.getAllTheUsers());
     }
 
     @GetMapping("/{userId}")
+    @ApiOperation(value = "Get the user by id ", produces = "application/json")
     public ResponseEntity<User> getUserById(@PathVariable Integer userId){
         return ResponseEntity.ok(service.getUserById(userId));
     }
 
     @GetMapping("/first-name/{fn}")
+    @ApiOperation(value = "Get the user by firstName ", produces = "application/json")
     public ResponseEntity<User> getUserByFirstName(@PathVariable(name = "fn") String firstName){
         return ResponseEntity.ok(service.getUserByFirstName(firstName));
     }
 
 
     @PutMapping("{id}")
+    @ApiOperation(value = "Update the user's address ", produces = "application/json")
     public ResponseEntity<User> updateUser(@RequestBody UserRequest userRequest, @PathVariable Integer id){
         try {
             return new ResponseEntity<>(service.updateUser(userRequest, id), HttpStatus.CREATED);
