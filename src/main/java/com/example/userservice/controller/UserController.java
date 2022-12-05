@@ -2,6 +2,7 @@ package com.example.userservice.controller;
 
 import com.example.userservice.dto.UserRequest;
 import com.example.userservice.entity.User;
+import com.example.userservice.exception.UserNotFoundException;
 import com.example.userservice.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -47,13 +48,12 @@ public class UserController {
 
     @PutMapping("{id}")
     @ApiOperation(value = "Update the user's address ", produces = "application/json")
-    public ResponseEntity<User> updateUser(@RequestBody UserRequest userRequest, @PathVariable Integer id){
+    public ResponseEntity updateUser(@RequestBody UserRequest userRequest, @PathVariable Integer id){
         try {
             return new ResponseEntity<>(service.updateUser(userRequest, id), HttpStatus.CREATED);
         }
-        catch (Exception e){
-            return ResponseEntity.notFound().build();
+        catch (UserNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with given id: " + id);
         }
     }
-
 }
