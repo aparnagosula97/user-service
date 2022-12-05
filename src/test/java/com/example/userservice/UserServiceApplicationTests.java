@@ -99,5 +99,22 @@ class UserServiceApplicationTests {
 
     }
 
+    @Test
+    public void getUserByIdException(){
+        String uri = "http://localhost:8080/api/v1/users";
+        User user = User.builder().address("Adrs").age(21).firstName("FN").lastName("LN").build();
+        ResponseEntity<User> postResult = restTemplate.postForEntity(uri, user, User.class);
+        try{
+            restTemplate.getForEntity(uri + "/1", User.class);
+        }
+        catch(HttpClientErrorException e){
+            Assert.assertEquals(404, e.getRawStatusCode());
+            Assert.assertEquals("User not found with given id: 1" , e.getResponseBodyAsString());
+        }
+
+
+
+    }
+
 
 }
